@@ -1,0 +1,1 @@
+export const API_ENDPOINT = "https://api.weekday.technology/adhoc/getSampleJdJSON";
