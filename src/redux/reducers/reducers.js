@@ -11,7 +11,7 @@ export const initialState = {
   limit: 10,
   offset: 0,
 };
-export function fetchJobList() {
+export function fetchJob() {
   return async (dispatch, getState) => {
     const { limit, offset } = getState().listStore;
     try {

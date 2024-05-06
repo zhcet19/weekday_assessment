@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography, Container, Button, Dialog, DialogTitle, DialogContent, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { Bolt, LocationOn, Work } from '@mui/icons-material'
+import { Bolt } from '@mui/icons-material'
 
 
 function JobCard({ index, job }) {
@@ -37,27 +37,27 @@ function JobCard({ index, job }) {
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <img src={companyImage} alt={jobCompany} style={{ width: '50px', height: 'auto', marginRight: '20px' }} />
         <Box>
-          <Typography variant="h2" sx={{fontSize: '13px', fontWeight: '600', color: '#8b8b8b', marginBottom: '4px'}}>{jobCompany}</Typography>
-          <Box sx={{ display: 'flex', alignItems: 'center', fontSize: '14px', fontWeight: '400', color: '#8b8b8b', marginBottom: '4px'}}>
-            <Work style={{ fontSize: 15 }} />
-            <Typography variant="h3" sx={{fontSize: '14px', fontWeight: '400', color: '#8b8b8b', textTransform: 'capitalize', marginLeft: '4px' }}>
-              {jobRole} Role
+          <Typography variant="h2" sx={{fontSize: '13px', fontWeight: '600', color: '#8b8b8b', marginBottom: '4px', textAlign:'left'}}>{jobCompany}</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', fontSize: '14px', fontWeight: '400', color: '#8b8b8b', marginBottom: '4px',textAlign:'left'}}>
+            <Typography variant="h3" sx={{fontSize: '14px', fontWeight: '400', color: '#8b8b8b', textTransform: 'capitalize',  textAlign:'left' }}>
+              {jobRole}
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', fontSize: '11px', fontWeight: '500', marginBottom: '4px'}}>
-            <LocationOn style={{ fontSize: 15 }} />
+        
             <Typography variant="h3" sx={{fontSize: '11px', fontWeight: '500', textTransform: 'capitalize', marginLeft: '3px' }}>
               {location}
             </Typography>
           </Box>
         </Box>
       </Box>
-      <Typography variant="subtitle2" color="text.secondary" sx={{ fontSize: '14px', fontWeight: '400', marginTop: '10px' }}>
-        Estimated Salary: {salaryCurrencyCode === 'USD' ? '$' : salaryCurrencyCode} {minJdSalary ? `${minJdSalary} - ` : ''}{maxJdSalary}
+      <Typography variant="subtitle2" color="text.secondary" sx={{ fontSize: '14px', fontWeight: '400', marginTop: '10px',textAlign:'left' }}>
+        Estimated Salary: {salaryCurrencyCode === 'USD' ? '$' : salaryCurrencyCode} {minJdSalary ? `${minJdSalary}L - ` : ''}{maxJdSalary}L
       </Typography>
-      <Typography variant="subtitle2" sx={{ fontSize: '16px', marginTop: '15px',fontWeight: '600' }}>About Company:</Typography>
-      <Typography variant="body2" sx={{ marginBottom: '10px', position: 'relative', overflow: 'hidden', maxHeight: '100px' }}>
-        {jobDetailsFromCompany.substring(0, 10)}
+      <Typography variant="subtitle2" sx={{ fontSize: '16px', marginTop: '15px',fontWeight: '600' , textAlign:'left'}}>About Company:</Typography>
+      <Typography variant="subtitle2" sx={{ fontSize: '16px',fontWeight: '400' , textAlign:'left'}}>About Us</Typography>
+      <Typography variant="body2" sx={{ marginBottom: '30px', position: 'relative', overflow: 'hidden', maxHeight: '200px' , textAlign:'left'}}>
+        {jobDetailsFromCompany.substring(0,300)}
         <Box sx={{ 
           position: 'absolute', 
           bottom: 0, 
@@ -67,7 +67,7 @@ function JobCard({ index, job }) {
         }}/>
       </Typography>
       <Typography onClick={handleExpandClick} aria-expanded={expanded} sx={{ fontSize: '14px', cursor: 'pointer', marginBottom: '10px', color: '#4943da', textAlign: 'center', position: 'relative', top: '-20px'}}>
-        Show More
+        View Job
       </Typography>
       <Dialog open={expanded} onClose={handleExpandClick}>
         <DialogTitle sx={{ textAlign: 'center'}}>Job Description</DialogTitle>
@@ -78,12 +78,12 @@ function JobCard({ index, job }) {
         </DialogContent>
       </Dialog>
       {minExp === null && maxExp === null ? null :
-        <><Typography variant="subtitle2" color="text.secondary" sx={{ marginTop: '10px',fontWeight: '600' }}>Experience:</Typography><Typography variant="subtitle2" color="text.secondary" sx={{ marginBottom: '10px' }}>
-          {minExp === maxExp ? `${minExp} years` : `${minExp ? `${minExp} - ` : ''}${maxExp} years`}
+        <><Typography variant="subtitle2" color="text.secondary" sx={{ marginTop: '10px',fontWeight: '600' , textAlign:'left'}}>Minimum Experience</Typography><Typography variant="subtitle2" color="text.secondary" sx={{ marginBottom: '10px', textAlign:'left' }}>
+          { `${minExp} years`}
         </Typography></>
       }
       <Link to={jdLink} style={{ textDecoration: 'none' }}>
-        <Button variant="contained" size="small" sx={{ color: '#000000', fontWeight: 600, backgroundColor: 'rgb(85, 239, 196)', '&:hover': { backgroundColor: 'rgb(75, 215, 174)' }, width: '90%', display: 'block', margin: '0 auto', padding: '10px' }}>
+        <Button variant="contained" size="small" sx={{ color: '#000000', fontWeight: 600, backgroundColor: 'rgb(85, 239, 196)', '&:hover': { backgroundColor: 'rgb(75, 215, 174)' }, width: '100%', display: 'block', margin: '0 auto', padding: '10px' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
             <Bolt sx={{ color: 'yellow'}} /> Easy Apply
           </Box>

@@ -1,33 +1,46 @@
-import React from 'react';
-import { FormControl, InputLabel, Select, MenuItem, Checkbox, ListItemText, FormControlLabel, Switch, TextField, Grid, Box, Typography } from '@mui/material';
+import React from "react";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  ListItemText,
+  Grid,
+  Box,
+  Typography,
+} from "@mui/material";
 
 function Filter({ filter, setFilter, filterOptions }) {
   const handleFilterChange = (event) => {
     const { name, value } = event.target;
-    setFilter(prevFilter => ({ ...prevFilter, [name]: Array.isArray(value) ? value : [value] }));
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      [name]: Array.isArray(value) ? value : [value],
+    }));
   };
 
   const handleRemoteChange = (event) => {
-    const value = event.target.value; 
-    const isRemote = value === 1 ? true : false; 
-  
-    setFilter(prevFilter => ({
+    const value = event.target.value;
+    const isRemote = value === 1 ? true : false;
+
+    setFilter((prevFilter) => ({
       ...prevFilter,
-      isRemote: isRemote
+      isRemote: isRemote,
     }));
   };
 
   const handleNumberInputChange = (event) => {
     const { name, value } = event.target;
-    setFilter(prevFilter => ({ ...prevFilter, [name]: value === '' ? '' : Number(value) }));
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      [name]: value === "" ? "" : Number(value),
+    }));
   };
 
   return (
     <Grid container justifyContent="center">
-      <Box sx={{ width: '80%', mt: 3, mb: 3 }}>
-        <Typography sx={{mb:4}}>
-            Search Jobs
-        </Typography>
+      <Box sx={{ width: "80%", mt: 3, mb: 3 }}>
+        <Typography sx={{ mb: 4 }}>Search Jobs</Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6} md={4}>
             <FormControl fullWidth>
@@ -38,18 +51,29 @@ function Filter({ filter, setFilter, filterOptions }) {
                 multiple
                 value={filter.jobCompany}
                 onChange={handleFilterChange}
-                renderValue={(selected) => selected.join(', ')}
-                style={{ textTransform: 'capitalize' }}
+                renderValue={(selected) => selected.join(", ")}
+                style={{ textTransform: "capitalize" }}
+                MenuProps={{
+                  PaperProps: {
+                    style: {
+                      maxHeight: 300,
+                      width: 250,
+                    },
+                  },
+                }}
               >
                 {filterOptions.jobCompany.map((loc, index) => (
                   <MenuItem key={index} value={loc}>
-                    <Checkbox checked={filter.jobCompany.indexOf(loc) > -1} />
-                    <ListItemText primary={loc} style={{ textTransform: 'capitalize' }} />
+                    <ListItemText
+                      primary={loc}
+                      style={{ textTransform: "capitalize" }}
+                    />
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
           </Grid>
+
           <Grid item xs={12} sm={6} md={4}>
             <FormControl fullWidth>
               <InputLabel id="location-label">Location</InputLabel>
@@ -59,18 +83,29 @@ function Filter({ filter, setFilter, filterOptions }) {
                 multiple
                 value={filter.location}
                 onChange={handleFilterChange}
-                renderValue={(selected) => selected.join(', ')}
-                style={{ textTransform: 'capitalize' }}
+                renderValue={(selected) => selected.join(", ")}
+                style={{ textTransform: "capitalize" }}
+                MenuProps={{
+                  PaperProps: {
+                    style: {
+                      maxHeight: 300,
+                      width: 250,
+                    },
+                  },
+                }}
               >
                 {filterOptions.location.map((loc, index) => (
                   <MenuItem key={index} value={loc}>
-                    <Checkbox checked={filter.location.indexOf(loc) > -1} />
-                    <ListItemText primary={loc} style={{ textTransform: 'capitalize' }} />
+                    <ListItemText
+                      primary={loc}
+                      style={{ textTransform: "capitalize" }}
+                    />
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
           </Grid>
+
           <Grid item xs={12} sm={6} md={4}>
             <FormControl fullWidth>
               <InputLabel id="role-label">Role</InputLabel>
@@ -80,13 +115,70 @@ function Filter({ filter, setFilter, filterOptions }) {
                 multiple
                 value={filter.role}
                 onChange={handleFilterChange}
-                renderValue={(selected) => selected.join(', ')}
-                style={{ textTransform: 'capitalize' }}
+                renderValue={(selected) => selected.join(", ")}
+                style={{ textTransform: "capitalize" }}
+                MenuProps={{
+                  PaperProps: {
+                    style: {
+                      maxHeight: 300,
+                      width: 250,
+                    },
+                  },
+                }}
               >
                 {filterOptions.role.map((loc, index) => (
                   <MenuItem key={index} value={loc}>
-                    <Checkbox checked={filter.role.indexOf(loc) > -1} />
-                    <ListItemText primary={loc} style={{ textTransform: 'capitalize' }} />
+                    <ListItemText
+                      primary={loc}
+                      style={{ textTransform: "capitalize" }}
+                    />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12} sm={6} md={4}>
+          <FormControl fullWidth >
+  <InputLabel id="minExperience-label">Minimum Experience</InputLabel>
+  <Select
+    labelId="minExperience-label"
+    id="minExperience"
+    name="minExperience"
+    value={filter.minExperience}
+    onChange={handleNumberInputChange}
+    MenuProps={{
+      PaperProps: {
+        style: {
+          maxHeight: 300,
+          width: 250,
+        },
+      },
+    }}
+  >
+    {[...Array(7).keys()].map((year) => (
+      <MenuItem key={year} value={year}>
+       {year !== 0 && year}
+      </MenuItem>
+    ))}
+  </Select>
+</FormControl>
+
+          </Grid>
+          <Grid item xs={12} sm={6} md={4}>
+            <FormControl fullWidth>
+              <InputLabel id="minSalary-label">Minimum Salary</InputLabel>
+              <Select
+                labelId="minSalary-label"
+                id="minSalary"
+                name="minSalary"
+                value={filter.minSalary}
+                onChange={handleNumberInputChange}
+                fullWidth
+              >
+                {[...Array(5).keys()].map((salary) => (
+                  <MenuItem key={salary} value={salary * 10}>
+                    {salary * 10}L
                   </MenuItem>
                 ))}
               </Select>
@@ -94,60 +186,23 @@ function Filter({ filter, setFilter, filterOptions }) {
           </Grid>
           <Grid item xs={12} sm={6} md={4}>
             <FormControl fullWidth>
-          <InputLabel id="minExperience-label">Minimum Experience</InputLabel>
-  <Select
-    labelId="minExperience-label"
-    id="minExperience"
-    name="minExperience"
-    value={filter.minExperience}
-    onChange={handleNumberInputChange}
-    fullWidth
-  >
-    {[...Array(7).keys()].map(year => (
-      <MenuItem key={year} value={year}>{year}</MenuItem>
-    ))}
-  </Select>
-  </FormControl>
+              <InputLabel id="remote-label">Remote</InputLabel>
+              <Select
+                labelId="remote-label"
+                id="remote"
+                name="remote"
+                value={filter.isRemote ? 1 : 0}
+                onChange={handleRemoteChange}
+                fullWidth
+              >
+                <MenuItem value={1}>Remote</MenuItem>
+                <MenuItem value={0}>In-office</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <FormControl fullWidth>
-  <InputLabel id="minSalary-label">Minimum Salary</InputLabel>
-  <Select
-    labelId="minSalary-label"
-    id="minSalary"
-    name="minSalary"
-    value={filter.minSalary}
-    onChange={handleNumberInputChange}
-    fullWidth
-  >
-    {[...Array(5).keys()].map(salary => (
-      <MenuItem key={salary} value={salary * 10}>{salary * 10}L</MenuItem>
-    ))}
-   
-    
-  </Select>
-  </FormControl>
-</Grid>
-<Grid item xs={12} sm={6} md={4}>
-  <FormControl fullWidth>
-    <InputLabel id="remote-label">Remote</InputLabel>
-    <Select
-      labelId="remote-label"
-      id="remote"
-      name="remote"
-      value={filter.isRemote ? 1 : 0}
-      onChange={handleRemoteChange} 
-      fullWidth
-    >
-      <MenuItem value={1}>Remote</MenuItem>
-      <MenuItem value={0}>In-office</MenuItem>
-    </Select>
-  </FormControl>
-</Grid>
         </Grid>
       </Box>
     </Grid>
-
   );
 }
 

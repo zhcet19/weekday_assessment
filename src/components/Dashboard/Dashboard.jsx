@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Box, CircularProgress, Container, Grid } from '@mui/material';
-import { fetchJobList } from '../../redux/reducers/reducers';
+import { fetchJob } from '../../redux/reducers/reducers';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Filter from '../Filter/Filter';
 import JobCard from '../JobCard/JobCard';
@@ -51,7 +51,7 @@ function Dashboard() {
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting) {
-        dispatch(fetchJobList());
+        dispatch(fetchJob());
       }
     });
 
